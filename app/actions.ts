@@ -1,0 +1,18 @@
+// "use server";
+// import { neon } from "@neondatabase/serverless";
+
+// export async function getData() {
+//     const sql = neon('postgresql://Expense-Tracker_owner:npg_PCAF25ZaLklr@ep-steep-cake-a88xxds5.eastus2.azure.neon.tech/Expense-Tracker?sslmode=require');
+//     const data = await sql`...`;
+//     return data;
+// }
+
+// app/actions.ts
+"use server";
+import { neon } from "@neondatabase/serverless";
+
+export async function getData() {
+    const sql = neon(process.env.DATABASE_URL);
+    const data = await sql`...`;
+    return data;
+}

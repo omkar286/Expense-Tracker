@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "baseUrl": ".",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"] ,
+    "paths": {
+      "@components/*": ["components/*"],
+      "@utils/*": ["db/*"],
+      "@styles/*": ["styles/*"]
+    },
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx"
+, "(auth)/sign-in/[[...sign-in]]/page.jsx", "drizzle.config.js", "db/index.js"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
