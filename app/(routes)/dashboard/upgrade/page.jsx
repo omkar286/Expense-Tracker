@@ -2,7 +2,7 @@ import React from 'react'
 
 function upgrade() {
   return (
-    <div>upgrade</div>
+    <div>Summary</div>
   )
 }
 
