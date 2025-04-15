@@ -31,7 +31,7 @@ function Body() {
       
             <div className="mt-8 flex flex-wrap gap-4 text-center">
               <a
-                href="#"
+                href="/dashboard"
                 className="block w-full rounded-sm bg-rose-600 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-rose-700 focus:ring-3 focus:outline-hidden sm:w-auto"
               >
                 Get Started
