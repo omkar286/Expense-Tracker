@@ -1,8 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Select, SelectItem } from "@/components/ui/select";
+import { Card, CardContent } from "components/components/ui/card";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "components/components/ui/select";
+
 import { Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -81,11 +88,17 @@ function upgrade() {
 
       <h2 className="text-xl font-semibold mb-4">Your Expense Summary</h2>
 
-      <Select value={timeframe} onValueChange={setTimeframe} className="mb-4 w-48">
-        <SelectItem value="weekly">Weekly</SelectItem>
-        <SelectItem value="monthly">Monthly</SelectItem>
-        <SelectItem value="yearly">Yearly</SelectItem>
-      </Select>
+<Select value={timeframe} onValueChange={setTimeframe}>
+  <SelectTrigger className="mb-4 w-48">
+    <SelectValue placeholder="Select timeframe" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="weekly">Weekly</SelectItem>
+    <SelectItem value="monthly">Monthly</SelectItem>
+    <SelectItem value="yearly">Yearly</SelectItem>
+  </SelectContent>
+</Select>
+
 
       <Card className="mb-6">
         <CardContent className="p-6">
