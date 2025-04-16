@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import * as XLSX from 'xlsx';
-import nlp from 'compromise';
+// import nlp from 'compromise';
 import { db } from '@utils/index';
 import { Expenses } from '@utils/schema';
 
