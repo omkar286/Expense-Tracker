@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import * as XLSX from 'xlsx';
 import nlp from 'compromise';
-import { db } from '@/db';
-import { Expenses } from '@/db/schema';
+import { db } from '@utils/index';
+import { Expenses } from '@utils/schema';
 
 function categorize(description) {
   const doc = nlp(description.toLowerCase());
