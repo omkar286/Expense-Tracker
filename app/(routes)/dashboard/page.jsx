@@ -8,6 +8,7 @@ import { desc, eq, getTableColumns, sql } from 'drizzle-orm'
 import { Budgets, Expenses } from '@utils/schema'
 import BudgetItem from './budgets/_components/BudgetItem';
 import ExpenseListTable from './expenses/_components/ExpenseListTable';
+import ImportUploader from 'components/ImportUploader';
 
 function Dashboard() {
 const {user} = useUser();
@@ -75,6 +76,11 @@ const GetAllExpenses=async()=>{
             ) )}
 
           </div>
+
+          <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Import Expenses</h1>
+      <ImportUploader />
+    </div>
 
         </div>
       </div>
