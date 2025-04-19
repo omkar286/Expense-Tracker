@@ -68,6 +68,10 @@ const GetAllExpenses=async()=>{
             expensesList={expensesList}
             refreshData={()=>getBudgetList()}
             />
+            <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Import Expenses</h1>
+      <ImportUploader />
+    </div>
           </div>
           <div className='grid gap-3'>
             <h2 className='font-bold text-lg'>Latest Budgets</h2>
@@ -76,11 +80,6 @@ const GetAllExpenses=async()=>{
             ) )}
 
           </div>
-
-          <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Import Expenses</h1>
-      <ImportUploader />
-    </div>
 
         </div>
       </div>

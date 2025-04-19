@@ -69,7 +69,7 @@ async function getOrCreateBudgetId(name, userEmail) {
     .insert(Budgets)
     .values({
       name: category,
-      amount: '0',
+      amount: '5000',
       icon,
       createdBy: userEmail,
     })

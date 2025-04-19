@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { useUser } from '@clerk/nextjs';
+import { toast } from 'sonner';
 
-export default function ImportUploader() {
+export default function ImportUploader({ refreshData }) {
   const { user } = useUser();
   const userEmail = user?.primaryEmailAddress?.emailAddress;
 
@@ -14,10 +15,10 @@ export default function ImportUploader() {
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState(null);
 
+
   const handleUpload = async () => {
     if (!file) return;
 
-    // ✅ Check file type
     const allowedTypes = [
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       'text/csv'
@@ -77,7 +78,7 @@ export default function ImportUploader() {
     try {
       const res = await fetch("/api/save", {
         method: "POST",
-        body: JSON.stringify({ data: preview, userEmail }), // ✅ Pass userEmail
+        body: JSON.stringify({ data: preview, userEmail }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -85,10 +86,15 @@ export default function ImportUploader() {
 
       const result = await res.json();
 
-      if (res.ok) {
+      if (res) { 
         setSaveMessage(`✅ Saved ${result.count} records to database`);
         setPreview([]);
         setFile(null);
+        toast("💾 Expenses added successfully!");
+        refreshData();
+
+        
+        
       } else {
         setSaveMessage(`❌ Save failed: ${result.error}`);
       }
@@ -120,7 +126,6 @@ export default function ImportUploader() {
         {loading ? "Uploading..." : "Upload"}
       </button>
 
-      {message && <p className="text-sm">{message}</p>}
 
       {preview.length > 0 && (
         <>
@@ -146,6 +151,9 @@ export default function ImportUploader() {
           </button>
 
           {saveMessage && <p className="text-sm">{saveMessage}</p>}
+          <p className="text-sm text-gray-500">
+            ⚠️ Note: Only supports saving budgets with amounts less than ₹5000.
+          </p>
         </>
       )}
     </div>
