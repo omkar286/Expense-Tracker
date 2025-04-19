@@ -8,7 +8,7 @@ import { desc, eq, getTableColumns, sql } from 'drizzle-orm'
 import { Budgets, Expenses } from '@utils/schema'
 import BudgetItem from './budgets/_components/BudgetItem';
 import ExpenseListTable from './expenses/_components/ExpenseListTable';
-import ImportUploader from 'components/ImportUploader';
+import ImportUploader from './_components/ImportUploader';
 
 function Dashboard() {
 const {user} = useUser();

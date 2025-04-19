@@ -1,8 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useUser } from '@clerk/nextjs';
 
 export default function ImportUploader() {
+  const { user } = useUser();
+  const userEmail = user?.primaryEmailAddress?.emailAddress;
+
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState([]);
   const [message, setMessage] = useState(null);
@@ -12,6 +16,17 @@ export default function ImportUploader() {
 
   const handleUpload = async () => {
     if (!file) return;
+
+    // ✅ Check file type
+    const allowedTypes = [
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'text/csv'
+    ];
+    if (!allowedTypes.includes(file.type)) {
+      setMessage("❌ Unsupported file type. Please upload .csv or .xlsx");
+      return;
+    }
+
     setLoading(true);
     setMessage(null);
     setPreview([]);
@@ -29,8 +44,12 @@ export default function ImportUploader() {
       const result = await res.json();
 
       if (res.ok) {
-        setMessage(`✅ Imported ${result.data.length} rows`);
-        setPreview(result.data);
+        if (!result.data || result.data.length === 0) {
+          setMessage("❌ File is empty or unreadable.");
+        } else {
+          setMessage(`✅ Imported ${result.data.length} rows`);
+          setPreview(result.data);
+        }
       } else {
         setMessage(`❌ Error: ${result.error}`);
       }
@@ -43,13 +62,22 @@ export default function ImportUploader() {
 
   const handleSaveToDB = async () => {
     if (preview.length === 0) return;
+
+    if (!userEmail) {
+      setSaveMessage("❌ Please log in to save data.");
+      return;
+    }
+
+    const confirmed = window.confirm("Are you sure you want to save this data to the database?");
+    if (!confirmed) return;
+
     setSaving(true);
     setSaveMessage(null);
 
     try {
       const res = await fetch("/api/save", {
         method: "POST",
-        body: JSON.stringify(preview),
+        body: JSON.stringify({ data: preview, userEmail }), // ✅ Pass userEmail
         headers: {
           "Content-Type": "application/json",
         },
@@ -81,6 +109,8 @@ export default function ImportUploader() {
         onChange={(e) => setFile(e.target.files?.[0] || null)}
         className="border p-2 rounded w-full"
       />
+
+      {file && <p className="text-sm text-gray-500">📄 Selected: {file.name}</p>}
 
       <button
         className="bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
