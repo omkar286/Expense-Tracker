@@ -70,7 +70,7 @@ const GetAllExpenses=async()=>{
             />
             <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Import Expenses</h1>
-      <ImportUploader />
+      <ImportUploader refreshData={()=>getBudgetList()} />
     </div>
           </div>
           <div className='grid gap-3'>
