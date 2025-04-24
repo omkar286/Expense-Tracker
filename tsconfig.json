@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "(auth)/sign-in/[[...sign-in]]/page.jsx", "drizzle.config.js", "db/index.js"  ],
+, "(auth)/sign-in/[[...sign-in]]/page.jsx", "drizzle.config.js", "db/index.js", "app/api/export/pdf/route.js"  ],
   "exclude": [
     "node_modules"
   ]

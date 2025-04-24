@@ -20,6 +20,7 @@ import {
   LinearScale,
   BarElement,
 } from "chart.js";
+import SmartSuggestions from "../_components/SmartSuggestion";
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
@@ -108,6 +109,8 @@ function upgrade() {
           </div>
         </CardContent>
       </Card>
+
+      
     </div>
   );
 }

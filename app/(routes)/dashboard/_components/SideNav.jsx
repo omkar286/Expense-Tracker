@@ -22,7 +22,9 @@ function SideNav() {
 
     return (
         <div className="h-screen p-5 border shadow-sm">
+            <a href='/'>
             <Image src={'/logo.svg'} alt="logo" width={160} height={100} />
+            </a>
             <div className="mt-5">
                 {menuList.map((menu) => (
                 
